@@ -37,7 +37,7 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/users","/users/**","/newevent","/events").authenticated()
-                .requestMatchers("/auth").permitAll()
+                .requestMatchers("/auth","/actualite").permitAll()
                 .and()
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
 

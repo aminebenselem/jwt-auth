@@ -17,7 +17,9 @@ public class EventController {
     private EventDao eventDao;
     @PostMapping("/newevent")
     public ResponseEntity<HttpStatus> addEvent(@RequestBody Event event){
-         eventDao.addEvent(event);
+        event.getDate().setTime( event.getDate().getTime() + (1000 * 60 * 60 * 24));
+
+        eventDao.addEvent(event);
          return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/events")

@@ -35,5 +35,7 @@ public class UserService implements UserDetailsService {
 
         return user;
     }
-
+    public void updatePassword ( User user){
+        userdao.save(user);
+    }
 }

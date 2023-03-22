@@ -40,6 +40,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+
   public void UpdateUserEmail ( String Mat_Pers,  String email  ){
       User x = new User () ;
     x=getUser(Mat_Pers);
@@ -52,7 +53,10 @@ public class UserService implements UserDetailsService {
       x.setNumerodetelephone(numerodetelephone);
       userdao.save(x);
   }
-  public void updatePassword ( User user){
+
+
+    public void updatePassword ( User user){
         userdao.save(user);
-  }
+    }
+
 }

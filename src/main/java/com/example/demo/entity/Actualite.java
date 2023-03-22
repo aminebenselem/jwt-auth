@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "actualite")
@@ -14,6 +15,17 @@ public class Actualite {
     private String title;
     private  String description;
     private String type;
+    private List<String> uri;
+
+
+    public List<String> getUri() {
+        return uri;
+    }
+
+    public void setUri(List<String> uri) {
+        this.uri = uri;
+    }
+
 
 
 

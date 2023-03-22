@@ -20,14 +20,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
-import static org.springframework.data.repository.init.ResourceReader.Type.JSON;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RestController
 @RequestMapping(value="/")
 @CrossOrigin(origins = "http://localhost:4200")
 
 public class UserController {
+
     @Autowired
     private PasswordEncoder pe;
     @Autowired
@@ -84,6 +84,19 @@ public class UserController {
         Gson gson = new Gson();
         return gson.toJson(user.getRole());
     }
+
+    @PutMapping(value = "/updateemail")
+    public void UpdateUserEmail (@RequestBody AuthParams Authparam ){
+        userService.UpdateUserEmail(Authparam.Mat_Pers,Authparam.MDP);
+
+    }
+    @PutMapping(value = "/updatephone")
+    public void UpdateUserPhone (@RequestBody AuthParams Authparam ){
+        userService.UpdateUserPhone(Authparam.Mat_Pers,Authparam.MDP);
+    }
+
+}
+
 
     @PostMapping(value = "/updatepassword")
     public void changePassword(@RequestBody Password p) {

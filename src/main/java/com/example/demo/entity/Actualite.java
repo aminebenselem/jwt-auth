@@ -15,14 +15,14 @@ public class Actualite {
     private String title;
     private  String description;
     private String type;
-    private List<String> uri;
+    private String uri;
 
 
-    public List<String> getUri() {
+    public String getUri() {
         return uri;
     }
 
-    public void setUri(List<String> uri) {
+    public void setUri(String uri) {
         this.uri = uri;
     }
 

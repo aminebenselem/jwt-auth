@@ -26,6 +26,7 @@ public class Role {
     public void setRoleName(String roleName) {
         this.roleName = roleName;
     }
+
     @OneToMany(mappedBy = "role")
     private List<User> users = new ArrayList<>();
 

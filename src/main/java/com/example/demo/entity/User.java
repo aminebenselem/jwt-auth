@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,8 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-
+import java.util.Set;
 
 
 @Getter
@@ -1059,7 +1059,7 @@ public class User implements UserDetails,GrantedAuthority {
 
     @Id
     private String Mat_Pers;
-@Column(length=32)
+
     private String MDP;
     private String COD_DEPT ;
 
@@ -1205,8 +1205,17 @@ public String getRole(){
 
 
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private List<Reclamation> reclamation= new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "userF")
+    private Set<Forum> forums;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "userR")
+    private Set<Reply> replies;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();

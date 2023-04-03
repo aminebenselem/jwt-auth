@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -24,14 +26,13 @@ import static org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
-@Slf4j
 @CrossOrigin(origins = "http://localhost:4200")
 public class FileUploadController {
 
-    @PostMapping(value = "upload", consumes = MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "upload")
     public ResponseEntity<Map<String, String>> handleFileUploadForm(@RequestPart("file") MultipartFile file) throws IOException {
 
-        log.info("handling request parts: {}", file);
+
 
         try {
 
@@ -57,8 +58,8 @@ public class FileUploadController {
             return ok().body(result);
 
         } catch (IOException e) {
-            log.error(e.getMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+
     }
 }

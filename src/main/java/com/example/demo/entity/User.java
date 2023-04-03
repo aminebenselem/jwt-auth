@@ -22,6 +22,24 @@ import java.util.Set;
 
 public class User implements UserDetails,GrantedAuthority {
 
+    private String email ;
+    private String numerodetelephone;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNumerodetelephone() {
+        return numerodetelephone;
+    }
+
+    public void setNumerodetelephone(String numerodetelephone) {
+        this.numerodetelephone = numerodetelephone;
+    }
 
     public String getMat_Pers() {
         return Mat_Pers;

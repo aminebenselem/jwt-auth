@@ -39,6 +39,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/users","/users/**","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums"
                 ,"/reply","/replies","/forep","/actualite","/image/**").authenticated()
                 .requestMatchers("/auth").permitAll()
+
                 .and()
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
 

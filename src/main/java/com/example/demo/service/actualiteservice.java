@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class actualiteservice {
     @Autowired
-    private  ActDao repo;
+    private ActDao repo;
 
     public List<Actualite> getAllActualite(){return repo.getAllActs();}
     public void addAct(Actualite actualite ){

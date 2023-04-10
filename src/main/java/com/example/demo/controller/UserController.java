@@ -3,6 +3,7 @@ import auth.AuthParams;
 import auth.JwtResponse;
 import auth.Password;
 import com.example.demo.config.TokenGeneration;
+import com.example.demo.entity.Agenda;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.google.gson.Gson;
@@ -59,6 +60,11 @@ public class UserController {
         user.setMDP(null);
         return user;
     }
+    @GetMapping({"/users/{Mat_Pers}/tasks"})
+    public List<Agenda> getalltasks(@PathVariable String Mat_Pers) {
+        User user = this.userService.getUser(Mat_Pers);
+        return user.getAgenda();
+    }
 
     @PostMapping(path = "/auth")
     public ResponseEntity<JwtResponse> signIn(@RequestBody AuthParams authParams) throws Exception {
@@ -98,7 +104,7 @@ public class UserController {
         userService.UpdateUserPhone(Authparam.Mat_Pers,Authparam.MDP);
     }
 
-}
+
 
 
     @PostMapping(value = "/updatepassword")

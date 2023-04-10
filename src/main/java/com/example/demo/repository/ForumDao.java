@@ -5,6 +5,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,5 +27,10 @@ public class ForumDao {
         TypedQuery<Forum> query = entityManager.createQuery("SELECT e FROM Forum e", Forum.class);
         return query.getResultList();
     }
-
+    public Forum getById(@Param("id") long id) {
+        TypedQuery<Forum> query = entityManager.createQuery("SELECT e FROM Forum e where e.id=?1", Forum.class)
+                .setParameter(1,id);
+        return query.getSingleResult();
+    }
+    
 }

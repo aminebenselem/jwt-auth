@@ -39,15 +39,18 @@ public class UserController {
     private AuthenticationManager authenticationManager;
 
     @GetMapping("/users")
-    public String getUsers() {
+    public List<User> getUsers() {
         List<User> users = userService.getAllUsers();
         for (User user :
                 users) {
             user.setMDP(null);
             user.setCOMPTE_DOMIC(null);
+            user.setCIN(null);
+            user.setMat_Pers(null);
+            user.setNUM_ASS(null);
         }
-        String jsonStr = JSONArray.toJSONString(users);
-        return jsonStr;
+
+        return users;
     }
 
     @GetMapping(path = "/users/{Mat_Pers}")
@@ -102,18 +105,18 @@ public class UserController {
     public void changePassword(@RequestBody Password p) {
 
         User user1 = userService.getUser(p.Mat_Pers);
-        boolean k= Objects.equals(p.newPassword, p.newPassword2);
-        boolean f = pe.matches(p.oldPassword,user1.getMDP());
-        if(k){
-        if (f) {
-            System.out.println("old password is correct");
-            user1.setMDP(pe.encode(p.newPassword));
-            userService.updatePassword(user1);
-        } else {
-            System.out.println("old password is wrong");
+        boolean k = Objects.equals(p.newPassword, p.newPassword2);
+        boolean f = pe.matches(p.oldPassword, user1.getMDP());
+        if (k) {
+            if (f) {
+                System.out.println("old password is correct");
+                user1.setMDP(pe.encode(p.newPassword));
+                userService.updatePassword(user1);
+            } else {
+                System.out.println("old password is wrong");
 
-        }
-        }else{
+            }
+        } else {
             System.out.println("passwords dont match");
         }
     }

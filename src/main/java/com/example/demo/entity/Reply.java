@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 @Entity
 public class Reply {
@@ -40,6 +41,7 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private  String body;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "Mat_Pers")

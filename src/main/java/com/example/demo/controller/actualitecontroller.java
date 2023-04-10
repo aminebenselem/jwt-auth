@@ -1,10 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Actualite;
-import com.example.demo.entity.Event;
 import com.example.demo.repository.ActDao;
-import com.example.demo.repository.EventDao;
-import com.example.demo.service.actualiteservice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

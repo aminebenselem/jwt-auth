@@ -36,10 +36,9 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/users","/users/**","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums"
-                ,"/reply","/replies","/forep","/actualite","/image/**").authenticated()
-                .requestMatchers("/auth").permitAll()
-
+                .requestMatchers("/users","/users/**","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
+                ,"/reply","/replies","/forep","/actualite","/replie","/forum").authenticated()
+                .requestMatchers("/auth","/image/**").permitAll()
                 .and()
                 .addFilterBefore(authFilter(), UsernamePasswordAuthenticationFilter.class);
 

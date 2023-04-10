@@ -1,32 +1,195 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 package com.example.demo.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
-
-@Getter
-@Setter
 @Entity
-@Table(name = "personnel")
-
-public class User implements UserDetails,GrantedAuthority {
-
-    private String email ;
+@Table(
+        name = "personnel"
+)
+public class User implements UserDetails, GrantedAuthority {
+    private String email;
     private String numerodetelephone;
+    @Id
+    private String Mat_Pers;
+    private String MDP;
+    private String COD_DEPT;
+    private String COD_SERV;
+    private String COD_FONCT;
+    private int COD_CATEG;
+    private int COD_CAT;
+    private int COD_GRAD;
+    private String COD_MOTIF;
+    private String COD_NATP;
+    private int COD_STAT;
+    private String NOM_PERS;
+    private String PREN_PERS;
+    private String CIN;
+    private String SEXE;
+    private String DAT_DEPT;
+    private String DAT_SERV;
+    private String DAT_FONCT;
+    private String DAT_QUALF;
+    private String DAT_CATEG;
+    private String DAT_CAT;
+    private String DAT_GRAD;
+    private String DAT_ECH;
+    private String DAT_EMB;
+    private String DAT_ENT;
+    private String DAT_TIT;
+    private String DAT_MOTIF;
+    private String DAT_NAIS;
+    private String COD_GOUV;
+    private String COD_DELEG;
+    private String COD_POST;
+    private String COD_RETR;
+    private String ETAT_ACT;
+    private String PER_MAT_PERS;
+    private String QUALF;
+    private String COD_SIT;
+    private String DAT_SIT;
+    private String CHEF_FAM;
+    private int NBRE_ENF;
+    private String CHARG_ENF;
+    private String CHARG_ALL;
+    private String FCT_FAM;
+    private int COD_ECH;
+    private String COD_AFFECT;
+    private int CATEG_EMB;
+    private int CAT_EMB;
+    private int GRAD_EMB;
+    private int ECH_EMB;
+    private String COD_NIVEAU;
+    private String DAT_RETR;
+    private String DAT_DECE;
+    private String COD_REG;
+    private String REPOS_HBD;
+    private String SUSPENS_ASS;
+    private String DAT_DEB_SUSPENS;
+    private String DAT_FIN_SUSPENS;
+    private String MOTIF_SUSPENS;
+    private String FORM_PERS;
+    private String COMPTE_HERIT;
+    private String BENEF;
+    private String NOM_JF;
+    private String DEPT_EMB;
+    private String COMPTE_PROCED_JUDIC;
+    private String BENEF_PROCED_JUDIC;
+    private String COD_BAT;
+    private String COD_BUR;
+    private String NOM_PERS_A;
+    private String PREN_PERS_A;
+    private String COD_FILL;
+    private String DAT_FILL;
+    private String POSTE_TRAV;
+    private String GRADE_ADM;
+    private String COD_METIER;
+    private String REGIME_TRAV;
+    private String COD_USER;
+    private String DAT_EFFET;
+    private String TYPE_SERV;
+    private String REG_CNG;
+    private String ADM_TECH;
+    private String DAT_STAT;
+    private String DAT_CIN;
+    private String LIE_EMI_CIN;
+    private String DAT_AFFECT;
+    private String LIEU_NAIS;
+    private String COD_LIEU_GEOG;
+    private String DAT_LIEU_GEOG;
+    private String FORM_PERS_A;
+    private String AVC;
+    private String AVQ;
+    private String DAT_AVC;
+    private String DAT_AVQ;
+    private String FONCT;
+    private String AV_VOIT;
+    private String TRS;
+    private String DAT_TRS;
+    private String DAT_VOIT;
+    private String AV_LOG;
+    private String DAT_LOG;
+    private String DAT_FONCT_ANT;
+    private String COMPTE_DOMIC;
+    private String NUM_ASS;
+    private String GRP_SANG;
+    private String POINTE;
+    private int TYP_CATEG;
+    private String SERV_MILIT;
+    private String NUM_RETR;
+    private String COD_FOND;
+    private String NUM_FOND;
+    private String DATE_FOND;
+    private String LIEU_NAISS_A;
+    private int ISOL;
+    private String LIEU_DET;
+    private String COD_POSIT;
+    private String DAT_POSIT;
+    private String DAT_GRADE_ADM;
+    private String DATE_EMB1;
+    private String DAT_ADM;
+    private String UNIFORM;
+    private String COD_UR;
+    private String GRADE_ADM_EMB;
+    private String ANC_GRADE_ADM;
+    private String BON_REST;
+    private String COD_AFF;
+    private String COD_EQUIP;
+    private String LIB_FONCT_AFF;
+    private String LIB_FONCT_AFF_A;
+    private String ROWID;
+    @ManyToOne(
+            fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+            name = "roleID"
+    )
+    private Role role;
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "user"
+    )
+    private List<Reclamation> reclamation = new ArrayList();
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "userF"
+    )
+    private Set<Forum> forums;
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "personnel",
+            fetch = FetchType.LAZY
+    )
+    private List<Agenda> agenda;
+    @JsonIgnore
+    @OneToMany(
+            mappedBy = "userR"
+    )
+    private Set<Reply> replies;
+
+    public User() {
+    }
 
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -34,7 +197,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNumerodetelephone() {
-        return numerodetelephone;
+        return this.numerodetelephone;
     }
 
     public void setNumerodetelephone(String numerodetelephone) {
@@ -42,15 +205,15 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getMat_Pers() {
-        return Mat_Pers;
+        return this.Mat_Pers;
     }
 
     public void setMat_Pers(String mat_Pers) {
-        Mat_Pers = mat_Pers;
+        this.Mat_Pers = mat_Pers;
     }
 
     public String getMDP() {
-        return MDP;
+        return this.MDP;
     }
 
     public void setMDP(String MDP) {
@@ -58,7 +221,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_DEPT() {
-        return COD_DEPT;
+        return this.COD_DEPT;
     }
 
     public void setCOD_DEPT(String COD_DEPT) {
@@ -66,7 +229,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_SERV() {
-        return COD_SERV;
+        return this.COD_SERV;
     }
 
     public void setCOD_SERV(String COD_SERV) {
@@ -74,7 +237,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_FONCT() {
-        return COD_FONCT;
+        return this.COD_FONCT;
     }
 
     public void setCOD_FONCT(String COD_FONCT) {
@@ -82,7 +245,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCOD_CATEG() {
-        return COD_CATEG;
+        return this.COD_CATEG;
     }
 
     public void setCOD_CATEG(int COD_CATEG) {
@@ -90,7 +253,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCOD_CAT() {
-        return COD_CAT;
+        return this.COD_CAT;
     }
 
     public void setCOD_CAT(int COD_CAT) {
@@ -98,7 +261,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCOD_GRAD() {
-        return COD_GRAD;
+        return this.COD_GRAD;
     }
 
     public void setCOD_GRAD(int COD_GRAD) {
@@ -106,7 +269,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_MOTIF() {
-        return COD_MOTIF;
+        return this.COD_MOTIF;
     }
 
     public void setCOD_MOTIF(String COD_MOTIF) {
@@ -114,7 +277,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_NATP() {
-        return COD_NATP;
+        return this.COD_NATP;
     }
 
     public void setCOD_NATP(String COD_NATP) {
@@ -122,7 +285,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCOD_STAT() {
-        return COD_STAT;
+        return this.COD_STAT;
     }
 
     public void setCOD_STAT(int COD_STAT) {
@@ -130,7 +293,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNOM_PERS() {
-        return NOM_PERS;
+        return this.NOM_PERS;
     }
 
     public void setNOM_PERS(String NOM_PERS) {
@@ -138,7 +301,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getPREN_PERS() {
-        return PREN_PERS;
+        return this.PREN_PERS;
     }
 
     public void setPREN_PERS(String PREN_PERS) {
@@ -146,7 +309,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCIN() {
-        return CIN;
+        return this.CIN;
     }
 
     public void setCIN(String CIN) {
@@ -154,7 +317,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getSEXE() {
-        return SEXE;
+        return this.SEXE;
     }
 
     public void setSEXE(String SEXE) {
@@ -162,7 +325,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_DEPT() {
-        return DAT_DEPT;
+        return this.DAT_DEPT;
     }
 
     public void setDAT_DEPT(String DAT_DEPT) {
@@ -170,7 +333,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_SERV() {
-        return DAT_SERV;
+        return this.DAT_SERV;
     }
 
     public void setDAT_SERV(String DAT_SERV) {
@@ -178,7 +341,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_FONCT() {
-        return DAT_FONCT;
+        return this.DAT_FONCT;
     }
 
     public void setDAT_FONCT(String DAT_FONCT) {
@@ -186,7 +349,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_QUALF() {
-        return DAT_QUALF;
+        return this.DAT_QUALF;
     }
 
     public void setDAT_QUALF(String DAT_QUALF) {
@@ -194,7 +357,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_CATEG() {
-        return DAT_CATEG;
+        return this.DAT_CATEG;
     }
 
     public void setDAT_CATEG(String DAT_CATEG) {
@@ -202,7 +365,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_CAT() {
-        return DAT_CAT;
+        return this.DAT_CAT;
     }
 
     public void setDAT_CAT(String DAT_CAT) {
@@ -210,7 +373,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_GRAD() {
-        return DAT_GRAD;
+        return this.DAT_GRAD;
     }
 
     public void setDAT_GRAD(String DAT_GRAD) {
@@ -218,7 +381,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_ECH() {
-        return DAT_ECH;
+        return this.DAT_ECH;
     }
 
     public void setDAT_ECH(String DAT_ECH) {
@@ -226,7 +389,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_EMB() {
-        return DAT_EMB;
+        return this.DAT_EMB;
     }
 
     public void setDAT_EMB(String DAT_EMB) {
@@ -234,7 +397,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_ENT() {
-        return DAT_ENT;
+        return this.DAT_ENT;
     }
 
     public void setDAT_ENT(String DAT_ENT) {
@@ -242,7 +405,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_TIT() {
-        return DAT_TIT;
+        return this.DAT_TIT;
     }
 
     public void setDAT_TIT(String DAT_TIT) {
@@ -250,7 +413,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_MOTIF() {
-        return DAT_MOTIF;
+        return this.DAT_MOTIF;
     }
 
     public void setDAT_MOTIF(String DAT_MOTIF) {
@@ -258,7 +421,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_NAIS() {
-        return DAT_NAIS;
+        return this.DAT_NAIS;
     }
 
     public void setDAT_NAIS(String DAT_NAIS) {
@@ -266,7 +429,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_GOUV() {
-        return COD_GOUV;
+        return this.COD_GOUV;
     }
 
     public void setCOD_GOUV(String COD_GOUV) {
@@ -274,7 +437,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_DELEG() {
-        return COD_DELEG;
+        return this.COD_DELEG;
     }
 
     public void setCOD_DELEG(String COD_DELEG) {
@@ -282,7 +445,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_POST() {
-        return COD_POST;
+        return this.COD_POST;
     }
 
     public void setCOD_POST(String COD_POST) {
@@ -290,7 +453,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_RETR() {
-        return COD_RETR;
+        return this.COD_RETR;
     }
 
     public void setCOD_RETR(String COD_RETR) {
@@ -298,7 +461,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getETAT_ACT() {
-        return ETAT_ACT;
+        return this.ETAT_ACT;
     }
 
     public void setETAT_ACT(String ETAT_ACT) {
@@ -306,7 +469,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getPER_MAT_PERS() {
-        return PER_MAT_PERS;
+        return this.PER_MAT_PERS;
     }
 
     public void setPER_MAT_PERS(String PER_MAT_PERS) {
@@ -314,7 +477,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getQUALF() {
-        return QUALF;
+        return this.QUALF;
     }
 
     public void setQUALF(String QUALF) {
@@ -322,7 +485,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_SIT() {
-        return COD_SIT;
+        return this.COD_SIT;
     }
 
     public void setCOD_SIT(String COD_SIT) {
@@ -330,7 +493,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_SIT() {
-        return DAT_SIT;
+        return this.DAT_SIT;
     }
 
     public void setDAT_SIT(String DAT_SIT) {
@@ -338,7 +501,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCHEF_FAM() {
-        return CHEF_FAM;
+        return this.CHEF_FAM;
     }
 
     public void setCHEF_FAM(String CHEF_FAM) {
@@ -346,7 +509,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getNBRE_ENF() {
-        return NBRE_ENF;
+        return this.NBRE_ENF;
     }
 
     public void setNBRE_ENF(int NBRE_ENF) {
@@ -354,7 +517,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCHARG_ENF() {
-        return CHARG_ENF;
+        return this.CHARG_ENF;
     }
 
     public void setCHARG_ENF(String CHARG_ENF) {
@@ -362,7 +525,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCHARG_ALL() {
-        return CHARG_ALL;
+        return this.CHARG_ALL;
     }
 
     public void setCHARG_ALL(String CHARG_ALL) {
@@ -370,7 +533,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getFCT_FAM() {
-        return FCT_FAM;
+        return this.FCT_FAM;
     }
 
     public void setFCT_FAM(String FCT_FAM) {
@@ -378,7 +541,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCOD_ECH() {
-        return COD_ECH;
+        return this.COD_ECH;
     }
 
     public void setCOD_ECH(int COD_ECH) {
@@ -386,7 +549,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_AFFECT() {
-        return COD_AFFECT;
+        return this.COD_AFFECT;
     }
 
     public void setCOD_AFFECT(String COD_AFFECT) {
@@ -394,7 +557,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCATEG_EMB() {
-        return CATEG_EMB;
+        return this.CATEG_EMB;
     }
 
     public void setCATEG_EMB(int CATEG_EMB) {
@@ -402,7 +565,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getCAT_EMB() {
-        return CAT_EMB;
+        return this.CAT_EMB;
     }
 
     public void setCAT_EMB(int CAT_EMB) {
@@ -410,7 +573,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getGRAD_EMB() {
-        return GRAD_EMB;
+        return this.GRAD_EMB;
     }
 
     public void setGRAD_EMB(int GRAD_EMB) {
@@ -418,7 +581,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getECH_EMB() {
-        return ECH_EMB;
+        return this.ECH_EMB;
     }
 
     public void setECH_EMB(int ECH_EMB) {
@@ -426,7 +589,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_NIVEAU() {
-        return COD_NIVEAU;
+        return this.COD_NIVEAU;
     }
 
     public void setCOD_NIVEAU(String COD_NIVEAU) {
@@ -434,7 +597,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_RETR() {
-        return DAT_RETR;
+        return this.DAT_RETR;
     }
 
     public void setDAT_RETR(String DAT_RETR) {
@@ -442,7 +605,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_DECE() {
-        return DAT_DECE;
+        return this.DAT_DECE;
     }
 
     public void setDAT_DECE(String DAT_DECE) {
@@ -450,7 +613,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_REG() {
-        return COD_REG;
+        return this.COD_REG;
     }
 
     public void setCOD_REG(String COD_REG) {
@@ -458,7 +621,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getREPOS_HBD() {
-        return REPOS_HBD;
+        return this.REPOS_HBD;
     }
 
     public void setREPOS_HBD(String REPOS_HBD) {
@@ -466,7 +629,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getSUSPENS_ASS() {
-        return SUSPENS_ASS;
+        return this.SUSPENS_ASS;
     }
 
     public void setSUSPENS_ASS(String SUSPENS_ASS) {
@@ -474,7 +637,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_DEB_SUSPENS() {
-        return DAT_DEB_SUSPENS;
+        return this.DAT_DEB_SUSPENS;
     }
 
     public void setDAT_DEB_SUSPENS(String DAT_DEB_SUSPENS) {
@@ -482,7 +645,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_FIN_SUSPENS() {
-        return DAT_FIN_SUSPENS;
+        return this.DAT_FIN_SUSPENS;
     }
 
     public void setDAT_FIN_SUSPENS(String DAT_FIN_SUSPENS) {
@@ -490,7 +653,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getMOTIF_SUSPENS() {
-        return MOTIF_SUSPENS;
+        return this.MOTIF_SUSPENS;
     }
 
     public void setMOTIF_SUSPENS(String MOTIF_SUSPENS) {
@@ -498,7 +661,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getFORM_PERS() {
-        return FORM_PERS;
+        return this.FORM_PERS;
     }
 
     public void setFORM_PERS(String FORM_PERS) {
@@ -506,7 +669,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOMPTE_HERIT() {
-        return COMPTE_HERIT;
+        return this.COMPTE_HERIT;
     }
 
     public void setCOMPTE_HERIT(String COMPTE_HERIT) {
@@ -514,7 +677,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getBENEF() {
-        return BENEF;
+        return this.BENEF;
     }
 
     public void setBENEF(String BENEF) {
@@ -522,7 +685,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNOM_JF() {
-        return NOM_JF;
+        return this.NOM_JF;
     }
 
     public void setNOM_JF(String NOM_JF) {
@@ -530,7 +693,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDEPT_EMB() {
-        return DEPT_EMB;
+        return this.DEPT_EMB;
     }
 
     public void setDEPT_EMB(String DEPT_EMB) {
@@ -538,7 +701,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOMPTE_PROCED_JUDIC() {
-        return COMPTE_PROCED_JUDIC;
+        return this.COMPTE_PROCED_JUDIC;
     }
 
     public void setCOMPTE_PROCED_JUDIC(String COMPTE_PROCED_JUDIC) {
@@ -546,7 +709,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getBENEF_PROCED_JUDIC() {
-        return BENEF_PROCED_JUDIC;
+        return this.BENEF_PROCED_JUDIC;
     }
 
     public void setBENEF_PROCED_JUDIC(String BENEF_PROCED_JUDIC) {
@@ -554,7 +717,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_BAT() {
-        return COD_BAT;
+        return this.COD_BAT;
     }
 
     public void setCOD_BAT(String COD_BAT) {
@@ -562,7 +725,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_BUR() {
-        return COD_BUR;
+        return this.COD_BUR;
     }
 
     public void setCOD_BUR(String COD_BUR) {
@@ -570,7 +733,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNOM_PERS_A() {
-        return NOM_PERS_A;
+        return this.NOM_PERS_A;
     }
 
     public void setNOM_PERS_A(String NOM_PERS_A) {
@@ -578,7 +741,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getPREN_PERS_A() {
-        return PREN_PERS_A;
+        return this.PREN_PERS_A;
     }
 
     public void setPREN_PERS_A(String PREN_PERS_A) {
@@ -586,7 +749,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_FILL() {
-        return COD_FILL;
+        return this.COD_FILL;
     }
 
     public void setCOD_FILL(String COD_FILL) {
@@ -594,7 +757,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_FILL() {
-        return DAT_FILL;
+        return this.DAT_FILL;
     }
 
     public void setDAT_FILL(String DAT_FILL) {
@@ -602,7 +765,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getPOSTE_TRAV() {
-        return POSTE_TRAV;
+        return this.POSTE_TRAV;
     }
 
     public void setPOSTE_TRAV(String POSTE_TRAV) {
@@ -610,7 +773,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getGRADE_ADM() {
-        return GRADE_ADM;
+        return this.GRADE_ADM;
     }
 
     public void setGRADE_ADM(String GRADE_ADM) {
@@ -618,7 +781,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_METIER() {
-        return COD_METIER;
+        return this.COD_METIER;
     }
 
     public void setCOD_METIER(String COD_METIER) {
@@ -626,7 +789,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getREGIME_TRAV() {
-        return REGIME_TRAV;
+        return this.REGIME_TRAV;
     }
 
     public void setREGIME_TRAV(String REGIME_TRAV) {
@@ -634,7 +797,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_USER() {
-        return COD_USER;
+        return this.COD_USER;
     }
 
     public void setCOD_USER(String COD_USER) {
@@ -642,7 +805,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_EFFET() {
-        return DAT_EFFET;
+        return this.DAT_EFFET;
     }
 
     public void setDAT_EFFET(String DAT_EFFET) {
@@ -650,7 +813,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getTYPE_SERV() {
-        return TYPE_SERV;
+        return this.TYPE_SERV;
     }
 
     public void setTYPE_SERV(String TYPE_SERV) {
@@ -658,7 +821,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getREG_CNG() {
-        return REG_CNG;
+        return this.REG_CNG;
     }
 
     public void setREG_CNG(String REG_CNG) {
@@ -666,7 +829,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getADM_TECH() {
-        return ADM_TECH;
+        return this.ADM_TECH;
     }
 
     public void setADM_TECH(String ADM_TECH) {
@@ -674,7 +837,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_STAT() {
-        return DAT_STAT;
+        return this.DAT_STAT;
     }
 
     public void setDAT_STAT(String DAT_STAT) {
@@ -682,7 +845,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_CIN() {
-        return DAT_CIN;
+        return this.DAT_CIN;
     }
 
     public void setDAT_CIN(String DAT_CIN) {
@@ -690,7 +853,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIE_EMI_CIN() {
-        return LIE_EMI_CIN;
+        return this.LIE_EMI_CIN;
     }
 
     public void setLIE_EMI_CIN(String LIE_EMI_CIN) {
@@ -698,7 +861,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_AFFECT() {
-        return DAT_AFFECT;
+        return this.DAT_AFFECT;
     }
 
     public void setDAT_AFFECT(String DAT_AFFECT) {
@@ -706,7 +869,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIEU_NAIS() {
-        return LIEU_NAIS;
+        return this.LIEU_NAIS;
     }
 
     public void setLIEU_NAIS(String LIEU_NAIS) {
@@ -714,7 +877,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_LIEU_GEOG() {
-        return COD_LIEU_GEOG;
+        return this.COD_LIEU_GEOG;
     }
 
     public void setCOD_LIEU_GEOG(String COD_LIEU_GEOG) {
@@ -722,7 +885,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_LIEU_GEOG() {
-        return DAT_LIEU_GEOG;
+        return this.DAT_LIEU_GEOG;
     }
 
     public void setDAT_LIEU_GEOG(String DAT_LIEU_GEOG) {
@@ -730,7 +893,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getFORM_PERS_A() {
-        return FORM_PERS_A;
+        return this.FORM_PERS_A;
     }
 
     public void setFORM_PERS_A(String FORM_PERS_A) {
@@ -738,7 +901,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getAVC() {
-        return AVC;
+        return this.AVC;
     }
 
     public void setAVC(String AVC) {
@@ -746,7 +909,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getAVQ() {
-        return AVQ;
+        return this.AVQ;
     }
 
     public void setAVQ(String AVQ) {
@@ -754,7 +917,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_AVC() {
-        return DAT_AVC;
+        return this.DAT_AVC;
     }
 
     public void setDAT_AVC(String DAT_AVC) {
@@ -762,7 +925,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_AVQ() {
-        return DAT_AVQ;
+        return this.DAT_AVQ;
     }
 
     public void setDAT_AVQ(String DAT_AVQ) {
@@ -770,7 +933,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getFONCT() {
-        return FONCT;
+        return this.FONCT;
     }
 
     public void setFONCT(String FONCT) {
@@ -778,7 +941,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getAV_VOIT() {
-        return AV_VOIT;
+        return this.AV_VOIT;
     }
 
     public void setAV_VOIT(String AV_VOIT) {
@@ -786,7 +949,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getTRS() {
-        return TRS;
+        return this.TRS;
     }
 
     public void setTRS(String TRS) {
@@ -794,7 +957,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_TRS() {
-        return DAT_TRS;
+        return this.DAT_TRS;
     }
 
     public void setDAT_TRS(String DAT_TRS) {
@@ -802,7 +965,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_VOIT() {
-        return DAT_VOIT;
+        return this.DAT_VOIT;
     }
 
     public void setDAT_VOIT(String DAT_VOIT) {
@@ -810,7 +973,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getAV_LOG() {
-        return AV_LOG;
+        return this.AV_LOG;
     }
 
     public void setAV_LOG(String AV_LOG) {
@@ -818,7 +981,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_LOG() {
-        return DAT_LOG;
+        return this.DAT_LOG;
     }
 
     public void setDAT_LOG(String DAT_LOG) {
@@ -826,7 +989,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_FONCT_ANT() {
-        return DAT_FONCT_ANT;
+        return this.DAT_FONCT_ANT;
     }
 
     public void setDAT_FONCT_ANT(String DAT_FONCT_ANT) {
@@ -834,7 +997,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOMPTE_DOMIC() {
-        return COMPTE_DOMIC;
+        return this.COMPTE_DOMIC;
     }
 
     public void setCOMPTE_DOMIC(String COMPTE_DOMIC) {
@@ -842,7 +1005,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNUM_ASS() {
-        return NUM_ASS;
+        return this.NUM_ASS;
     }
 
     public void setNUM_ASS(String NUM_ASS) {
@@ -850,7 +1013,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getGRP_SANG() {
-        return GRP_SANG;
+        return this.GRP_SANG;
     }
 
     public void setGRP_SANG(String GRP_SANG) {
@@ -858,7 +1021,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getPOINTE() {
-        return POINTE;
+        return this.POINTE;
     }
 
     public void setPOINTE(String POINTE) {
@@ -866,7 +1029,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getTYP_CATEG() {
-        return TYP_CATEG;
+        return this.TYP_CATEG;
     }
 
     public void setTYP_CATEG(int TYP_CATEG) {
@@ -874,7 +1037,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getSERV_MILIT() {
-        return SERV_MILIT;
+        return this.SERV_MILIT;
     }
 
     public void setSERV_MILIT(String SERV_MILIT) {
@@ -882,7 +1045,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNUM_RETR() {
-        return NUM_RETR;
+        return this.NUM_RETR;
     }
 
     public void setNUM_RETR(String NUM_RETR) {
@@ -890,7 +1053,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_FOND() {
-        return COD_FOND;
+        return this.COD_FOND;
     }
 
     public void setCOD_FOND(String COD_FOND) {
@@ -898,7 +1061,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getNUM_FOND() {
-        return NUM_FOND;
+        return this.NUM_FOND;
     }
 
     public void setNUM_FOND(String NUM_FOND) {
@@ -906,7 +1069,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDATE_FOND() {
-        return DATE_FOND;
+        return this.DATE_FOND;
     }
 
     public void setDATE_FOND(String DATE_FOND) {
@@ -914,7 +1077,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIEU_NAISS_A() {
-        return LIEU_NAISS_A;
+        return this.LIEU_NAISS_A;
     }
 
     public void setLIEU_NAISS_A(String LIEU_NAISS_A) {
@@ -922,7 +1085,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public int getISOL() {
-        return ISOL;
+        return this.ISOL;
     }
 
     public void setISOL(int ISOL) {
@@ -930,7 +1093,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIEU_DET() {
-        return LIEU_DET;
+        return this.LIEU_DET;
     }
 
     public void setLIEU_DET(String LIEU_DET) {
@@ -938,7 +1101,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_POSIT() {
-        return COD_POSIT;
+        return this.COD_POSIT;
     }
 
     public void setCOD_POSIT(String COD_POSIT) {
@@ -946,7 +1109,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_POSIT() {
-        return DAT_POSIT;
+        return this.DAT_POSIT;
     }
 
     public void setDAT_POSIT(String DAT_POSIT) {
@@ -954,7 +1117,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_GRADE_ADM() {
-        return DAT_GRADE_ADM;
+        return this.DAT_GRADE_ADM;
     }
 
     public void setDAT_GRADE_ADM(String DAT_GRADE_ADM) {
@@ -962,7 +1125,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDATE_EMB1() {
-        return DATE_EMB1;
+        return this.DATE_EMB1;
     }
 
     public void setDATE_EMB1(String DATE_EMB1) {
@@ -970,7 +1133,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getDAT_ADM() {
-        return DAT_ADM;
+        return this.DAT_ADM;
     }
 
     public void setDAT_ADM(String DAT_ADM) {
@@ -978,7 +1141,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getUNIFORM() {
-        return UNIFORM;
+        return this.UNIFORM;
     }
 
     public void setUNIFORM(String UNIFORM) {
@@ -986,7 +1149,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_UR() {
-        return COD_UR;
+        return this.COD_UR;
     }
 
     public void setCOD_UR(String COD_UR) {
@@ -994,7 +1157,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getGRADE_ADM_EMB() {
-        return GRADE_ADM_EMB;
+        return this.GRADE_ADM_EMB;
     }
 
     public void setGRADE_ADM_EMB(String GRADE_ADM_EMB) {
@@ -1002,7 +1165,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getANC_GRADE_ADM() {
-        return ANC_GRADE_ADM;
+        return this.ANC_GRADE_ADM;
     }
 
     public void setANC_GRADE_ADM(String ANC_GRADE_ADM) {
@@ -1010,7 +1173,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getBON_REST() {
-        return BON_REST;
+        return this.BON_REST;
     }
 
     public void setBON_REST(String BON_REST) {
@@ -1018,7 +1181,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_AFF() {
-        return COD_AFF;
+        return this.COD_AFF;
     }
 
     public void setCOD_AFF(String COD_AFF) {
@@ -1026,7 +1189,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getCOD_EQUIP() {
-        return COD_EQUIP;
+        return this.COD_EQUIP;
     }
 
     public void setCOD_EQUIP(String COD_EQUIP) {
@@ -1034,7 +1197,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIB_FONCT_AFF() {
-        return LIB_FONCT_AFF;
+        return this.LIB_FONCT_AFF;
     }
 
     public void setLIB_FONCT_AFF(String LIB_FONCT_AFF) {
@@ -1042,7 +1205,7 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getLIB_FONCT_AFF_A() {
-        return LIB_FONCT_AFF_A;
+        return this.LIB_FONCT_AFF_A;
     }
 
     public void setLIB_FONCT_AFF_A(String LIB_FONCT_AFF_A) {
@@ -1050,226 +1213,87 @@ public class User implements UserDetails,GrantedAuthority {
     }
 
     public String getROWID() {
-        return ROWID;
+        return this.ROWID;
     }
 
     public void setROWID(String ROWID) {
         this.ROWID = ROWID;
     }
 
-    @Id
-    private String Mat_Pers;
-
-    private String MDP;
-    private String COD_DEPT ;
-
-    private String COD_SERV ;
-
-    private String COD_FONCT ;
-
-    private int COD_CATEG ;
-
-
-    private int COD_CAT ;
-
-    private int COD_GRAD ;
-
-    private String COD_MOTIF;
-    private String COD_NATP ;
-    private int COD_STAT ;
-    private String NOM_PERS ;
-    private String PREN_PERS ;
-    private String CIN;
-    private String SEXE ;
-    private String DAT_DEPT ;
-    private String DAT_SERV ;
-    private String DAT_FONCT ;
-    private String DAT_QUALF ;
-    private String DAT_CATEG ;
-    private String DAT_CAT ;
-    private String DAT_GRAD ;
-    private String DAT_ECH ;
-    private String DAT_EMB ;
-    private String DAT_ENT ;
-    private String DAT_TIT ;
-    private String DAT_MOTIF ;
-    private String DAT_NAIS ;
-    private String COD_GOUV ;
-    private String COD_DELEG ;
-    private String COD_POST ;
-    private String COD_RETR ;
-    private String ETAT_ACT ;
-    private String  PER_MAT_PERS ;
-    private String  QUALF ;
-    private String COD_SIT ;
-    private String DAT_SIT ;
-    private String CHEF_FAM ;
-    private  int NBRE_ENF ;
-    private String CHARG_ENF ;
-    private  String CHARG_ALL ;
-    private  String FCT_FAM ;
-    private int COD_ECH ;
-    private  String COD_AFFECT ;
-    private int CATEG_EMB ;
-    private int CAT_EMB;
-    private int GRAD_EMB;
-    private int  ECH_EMB ;
-    private String COD_NIVEAU ;
-    private String DAT_RETR ;
-    private  String DAT_DECE ;
-    private String COD_REG ;
-    private String REPOS_HBD ;
-    private  String SUSPENS_ASS ;
-    private String DAT_DEB_SUSPENS ;
-    private String DAT_FIN_SUSPENS ;
-    private  String MOTIF_SUSPENS ;
-    private String FORM_PERS ;
-    private  String COMPTE_HERIT ;
-    private   String BENEF ;
-    private String NOM_JF ;
-    private String DEPT_EMB ;
-    private String COMPTE_PROCED_JUDIC;
-    private String BENEF_PROCED_JUDIC ;
-    private String COD_BAT ;
-    private String COD_BUR ;
-    private String NOM_PERS_A ;
-    private  String PREN_PERS_A ;
-    private  String COD_FILL ;
-    private  String DAT_FILL ;
-    private String POSTE_TRAV ;
-    private  String GRADE_ADM ;
-    private  String COD_METIER ;
-    private String REGIME_TRAV ;
-    private String COD_USER ;
-    private String DAT_EFFET ;
-    private String TYPE_SERV ;
-    private String REG_CNG ;
-    private String ADM_TECH ;
-    private String DAT_STAT ;
-    private String DAT_CIN ;
-    private String LIE_EMI_CIN ;
-    private String DAT_AFFECT ;
-    private String LIEU_NAIS ;
-    private String COD_LIEU_GEOG ;
-    private String DAT_LIEU_GEOG ;
-    private String  FORM_PERS_A ;
-    private String  AVC ;
-    private String AVQ ;
-    private  String DAT_AVC ;
-    private  String DAT_AVQ ;
-    private String  FONCT ;
-    private  String AV_VOIT ;
-    private String   TRS ;
-    private String  DAT_TRS ;
-    private String DAT_VOIT ;
-    private String  AV_LOG ;
-    private String DAT_LOG ;
-    private String DAT_FONCT_ANT ;
-    private  String COMPTE_DOMIC ;
-    private  String NUM_ASS ;
-    private String GRP_SANG ;
-    private String  POINTE ;
-    private  int TYP_CATEG ;
-    private  String SERV_MILIT ;
-    private  String NUM_RETR ;
-    private  String COD_FOND ;
-    private  String NUM_FOND ;
-    private String DATE_FOND ;
-    private String LIEU_NAISS_A ;
-    private  int ISOL ;
-    private String LIEU_DET ;
-    private  String  COD_POSIT ;
-    private String DAT_POSIT ;
-    private String DAT_GRADE_ADM ;
-    private String DATE_EMB1 ;
-    private String DAT_ADM ;
-    private  String UNIFORM ;
-    private String COD_UR ;
-    private String GRADE_ADM_EMB ;
-    private  String ANC_GRADE_ADM ;
-    private String BON_REST ;
-    private String COD_AFF ;
-    private String COD_EQUIP ;
-    private  String  LIB_FONCT_AFF ;
-    private String LIB_FONCT_AFF_A ;
-    private String  ROWID ;
-
-public String getRole(){
-    return role.getRoleName();
-}
-
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "roleID")
-    private Role role;
-
-
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "user")
-    private List<Reclamation> reclamation= new ArrayList<>();
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "userF")
-    private Set<Forum> forums;
-
-    public Set<Reply> getReplies() {
-        return replies;
+    public String getRole() {
+        return this.role.getRoleName();
     }
 
-    public void setReplies(Set<Reply> replies) {
-        this.replies = replies;
+    public List<Agenda> getAgenda() {
+        return this.agenda;
     }
 
+    public void setAgenda(List<Agenda> agenda) {
+        this.agenda = agenda;
+    }
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "userR")
-    private Set<Reply> replies;
-
-
-
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();
-
-        list.add(new SimpleGrantedAuthority( getRole()));
-
+        List<GrantedAuthority> list = new ArrayList();
+        list.add(new SimpleGrantedAuthority(this.getRole()));
         return list;
-
     }
 
-    @Override
     public String getPassword() {
-        return MDP;
+        return this.MDP;
     }
 
-    @Override
     public String getUsername() {
-        return Mat_Pers;
+        return this.Mat_Pers;
     }
 
-    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    @Override
     public boolean isEnabled() {
         return true;
     }
 
-    @Override
     public String getAuthority() {
-        return getRole();
+        return this.getRole();
+    }
+
+    public List<Reclamation> getReclamation() {
+        return this.reclamation;
+    }
+
+    public Set<Forum> getForums() {
+        return this.forums;
+    }
+
+    public Set<Reply> getReplies() {
+        return this.replies;
+    }
+
+    public void setRole(final Role role) {
+        this.role = role;
+    }
+
+    @JsonIgnore
+    public void setReclamation(final List<Reclamation> reclamation) {
+        this.reclamation = reclamation;
+    }
+
+    @JsonIgnore
+    public void setForums(final Set<Forum> forums) {
+        this.forums = forums;
+    }
+
+    @JsonIgnore
+    public void setReplies(final Set<Reply> replies) {
+        this.replies = replies;
     }
 }

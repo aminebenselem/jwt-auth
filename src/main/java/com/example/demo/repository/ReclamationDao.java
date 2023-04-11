@@ -16,13 +16,12 @@ public class ReclamationDao {
     EntityManager entityManager;
     @Transactional
     public void addreclamtion(Reclamation reclamation) {
-        entityManager.createNativeQuery("INSERT INTO Reclamation (id,email,subject,message,departement,Mat_Pers) VALUES (?1,?2,?3,?4,?5,?6)")
-                .setParameter(1, reclamation.getId())
-                .setParameter(2, reclamation.getEmail())
-                .setParameter(3, reclamation.getSubject())
-                .setParameter(4,reclamation.getMessage())
-                .setParameter(5,reclamation.getDepartement())
-                .setParameter(6,reclamation.getUser().getMat_Pers())
+        entityManager.createNativeQuery("INSERT INTO Reclamation (email,subject,message,departement,Mat_Pers) VALUES (?1,?2,?3,?4,?5)")
+                .setParameter(1, reclamation.getEmail())
+                .setParameter(2, reclamation.getSubject())
+                .setParameter(3,reclamation.getMessage())
+                .setParameter(4,reclamation.getDepartement())
+                .setParameter(5,reclamation.getUser().getMat_Pers())
                 .executeUpdate();
     }
     public List<Reclamation> getAllReclamation() {

@@ -52,17 +52,20 @@ public class Reclamation {
     }
 
     public User getUser() {
-        return user;
+        return userM;
     }
 
     public void setUser(User user) {
-        this.user = user;
+        this.userM = user;
     }
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Mat_Pers")
-    private User user;
+    @JoinColumn(name = "Mat_Pers",
+            foreignKey = @ForeignKey(
+            name = "fkey_Mat_pers"
+    ))
+    private User userM;
 
     public void setMessage(String message) {
         this.message = message;

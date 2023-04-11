@@ -25,8 +25,18 @@ public class Formation {
     private String theme;
     private String datedb;
     private String datefn;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
     private String formateur;
     private String Cabinet;
+    private String uri;
 
     public Formation() {
     }

@@ -7,7 +7,6 @@ import com.example.demo.entity.Agenda;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import com.google.gson.Gson;
-import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @RestController
 @RequestMapping(value="/")
@@ -108,22 +106,23 @@ public class UserController {
 
 
     @PostMapping(value = "/updatepassword")
-    public void changePassword(@RequestBody Password p) {
+    public String changePassword(@RequestBody Password p) {
 
         User user1 = userService.getUser(p.Mat_Pers);
         boolean k = Objects.equals(p.newPassword, p.newPassword2);
         boolean f = pe.matches(p.oldPassword, user1.getMDP());
         if (k) {
             if (f) {
-                System.out.println("old password is correct");
+
                 user1.setMDP(pe.encode(p.newPassword));
                 userService.updatePassword(user1);
+                return "old password is correct";
             } else {
-                System.out.println("old password is wrong");
+                return "old password is wrong";
 
             }
         } else {
-            System.out.println("passwords dont match");
+            return "saisir le méme mot de passe";
         }
     }
 }

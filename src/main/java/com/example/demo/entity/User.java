@@ -165,9 +165,9 @@ public class User implements UserDetails, GrantedAuthority {
     private Role role;
     @JsonIgnore
     @OneToMany(
-            mappedBy = "user"
+            mappedBy = "userM"
     )
-    private List<Reclamation> reclamation = new ArrayList();
+    private List<Reclamation> reclamation ;
     @JsonIgnore
     @OneToMany(
             mappedBy = "userF"

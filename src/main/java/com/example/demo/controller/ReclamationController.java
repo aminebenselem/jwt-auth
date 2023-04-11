@@ -17,13 +17,12 @@ public class ReclamationController {
     @Autowired
     private ReclamationDao reclamationDao;
     @PostMapping("/newrec")
-    public ResponseEntity<HttpStatus> addEvent(@RequestBody Reclamation reclamation){
-
+    public ResponseEntity<HttpStatus> addReclamation(@RequestBody Reclamation reclamation){
         reclamationDao.addreclamtion(reclamation);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/reclamation")
-    public ResponseEntity<List<Reclamation>> getEvents(){
+    public ResponseEntity<List<Reclamation>> getReclamation(){
         return new ResponseEntity<>(reclamationDao.getAllReclamation(),HttpStatus.OK) ;
     }
 }

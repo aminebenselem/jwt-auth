@@ -17,10 +17,11 @@ public class ForumDao {
     EntityManager entityManager;
     @Transactional
     public void addForum(Forum forum) {
-        entityManager.createNativeQuery("INSERT INTO Forum (title,body,Mat_Pers) VALUES (?1,?2,?3)")
+        entityManager.createNativeQuery("INSERT INTO Forum (title,body,Mat_Pers,replicount) VALUES (?1,?2,?3,?4)")
                 .setParameter(1, forum.getTitle())
                 .setParameter(2, forum.getBody())
                 .setParameter(3, forum.getUser().getMat_Pers())
+                .setParameter(4,0)
                 .executeUpdate();
     }
     public List<Forum> getAllForums() {

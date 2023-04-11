@@ -37,7 +37,9 @@ public class ForumController {
 
     @GetMapping(value = "/forums/{id}")
     public Forum getByid(@PathVariable long id) {
-        return forumDao.getById(id);
+        Forum forum=forumDao.getById(id);
+        forum.setReplicount(forum.getReplies().size());
+        return forum;
 
     }
     @GetMapping(value = "/forums/{id}/replies")

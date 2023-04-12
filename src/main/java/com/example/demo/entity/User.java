@@ -163,16 +163,26 @@ public class User implements UserDetails, GrantedAuthority {
             name = "roleID"
     )
     private Role role;
+
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "userM"
-    )
+    @OneToMany(mappedBy = "userM")
     private List<Reclamation> reclamation ;
+
+    public List<ReplyRec> getReplyRecList() {
+        return replyRecList;
+    }
+
+    public void setReplyRecList(List<ReplyRec> replyRecList) {
+        this.replyRecList = replyRecList;
+    }
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "userF"
-    )
+    @OneToMany(mappedBy = "userRec")
+    private List<ReplyRec> replyRecList;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userF")
     private Set<Forum> forums;
+
     @JsonIgnore
     @OneToMany(
             mappedBy = "personnel",
@@ -180,9 +190,7 @@ public class User implements UserDetails, GrantedAuthority {
     )
     private List<Agenda> agenda;
     @JsonIgnore
-    @OneToMany(
-            mappedBy = "userR"
-    )
+    @OneToMany(mappedBy = "userR")
     private Set<Reply> replies;
 
     public User() {

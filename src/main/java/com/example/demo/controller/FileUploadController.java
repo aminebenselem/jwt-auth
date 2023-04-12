@@ -35,7 +35,7 @@ public class FileUploadController {
             File f = new ClassPathResource("").getFile();
             final Path path = Paths.get(f.getAbsolutePath() + File.separator + "static" + File.separator + "image");
 
-            if (!Files.exists(path)) {
+            if (!Files.exists(path)){
                 Files.createDirectories(path);
             }
 

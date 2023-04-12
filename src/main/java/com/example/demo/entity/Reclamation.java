@@ -3,6 +3,8 @@ package com.example.demo.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="Reclamation")
 public class Reclamation {
@@ -10,6 +12,15 @@ public class Reclamation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    public int getReplycount() {
+        return replycount;
+    }
+
+    public void setReplycount(int replycount) {
+        this.replycount = replycount;
+    }
+
+    private  int replycount;
     public long getId() {
         return id;
     }
@@ -65,7 +76,20 @@ public class Reclamation {
             foreignKey = @ForeignKey(
             name = "fkey_Mat_pers"
     ))
+    @OneToMany
     private User userM;
+
+    public List<ReplyRec> getReplyRecList() {
+        return replyRecList;
+    }
+
+    public void setReplyRecList(List<ReplyRec> replyRecList) {
+        this.replyRecList = replyRecList;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "reclamationR")
+    private List<ReplyRec> replyRecList;
 
     public void setMessage(String message) {
         this.message = message;

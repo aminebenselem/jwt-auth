@@ -38,8 +38,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/users","/users/**","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
 
-                ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation","/updatephone"
-                ,"/updateemail","/formation/**","/uploadformation","/getallformation").authenticated()
+                ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
+                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec").authenticated()
 
                 .requestMatchers("/auth","/image/**").permitAll()
                 .and()

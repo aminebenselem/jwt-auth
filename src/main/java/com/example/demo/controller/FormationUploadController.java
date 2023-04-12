@@ -44,7 +44,6 @@ public class FormationUploadController {
             Path filePath = path.resolve(Objects.requireNonNull(file.getOriginalFilename()));
             Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             String fileUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-
                     .path("/formation/")
                     .path(file.getOriginalFilename())
                     .toUriString();

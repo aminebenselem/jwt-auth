@@ -156,6 +156,16 @@ public class User implements UserDetails, GrantedAuthority {
     private String LIB_FONCT_AFF;
     private String LIB_FONCT_AFF_A;
     private String ROWID;
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    private String uri;
     @ManyToOne(
             fetch = FetchType.EAGER
     )

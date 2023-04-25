@@ -11,6 +11,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,12 +35,12 @@ public class AgendaController {
     @PostMapping({"/newtask"})
     public ResponseEntity<HttpStatus> addAgenda(@RequestBody Agenda agenda) {
         this.agendaDao.addtask(agenda);
-        return new ResponseEntity(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping({"/alltasks/{mat_Pers}"})
-    public ResponseEntity<List<Agenda>> getagenda(@PathVariable String mat_Pers) {
-        return new ResponseEntity(this.agendaDao.getAlltasks(mat_Pers), HttpStatus.OK);
+    @GetMapping({"/alltasks"})
+    public ResponseEntity<List<Agenda>> getagenda() {
+        return new ResponseEntity<>(this.agendaDao.getAlltasks(SecurityContextHolder.getContext().getAuthentication().getName()), HttpStatus.OK);
     }
 
     @DeleteMapping({"/delete"})

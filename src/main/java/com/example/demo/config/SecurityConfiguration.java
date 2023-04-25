@@ -36,10 +36,10 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/users","/users/**","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
+                .requestMatchers("/users/**","/user","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
 
                 ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
-                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec").authenticated()
+                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation").authenticated()
 
                 .requestMatchers("/auth","/image/**").permitAll()
                 .and()

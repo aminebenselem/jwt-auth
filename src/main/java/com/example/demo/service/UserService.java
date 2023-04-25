@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,7 +26,6 @@ public class UserService implements UserDetailsService {
     public List<User> getAllUsers() {
         return userdao.getAllUsers();
     }
-
     public User getUser(String Mat_Pers) {
         return userdao.findUser(Mat_Pers);
     }
@@ -53,6 +54,12 @@ public class UserService implements UserDetailsService {
       x.setNumerodetelephone(numerodetelephone);
       userdao.save(x);
   }
+    public void UpdateUserPhoto ( String Mat_pers, String uri){
+        User x = new User () ;
+        x=getUser(Mat_pers);
+        x.setUri(uri);
+        userdao.save(x);
+    }
 
 
     public void updatePassword ( User user){

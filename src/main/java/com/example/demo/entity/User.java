@@ -6,13 +6,8 @@
 package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -50,7 +45,9 @@ public class User implements UserDetails, GrantedAuthority {
     private String DAT_QUALF;
     private String DAT_CATEG;
     private String DAT_CAT;
+
     private String DAT_GRAD;
+
     private String DAT_ECH;
     private String DAT_EMB;
     private String DAT_ENT;
@@ -161,6 +158,17 @@ public class User implements UserDetails, GrantedAuthority {
         return uri;
     }
 
+    public GradeAdministrative getGrade() {
+        return grade;
+    }
+
+    public void setGrade(GradeAdministrative grade) {
+        this.grade = grade;
+    }
+
+
+    @OneToOne(mappedBy = "userGrade", cascade = CascadeType.ALL)
+    private GradeAdministrative grade;
     public void setUri(String uri) {
         this.uri = uri;
     }

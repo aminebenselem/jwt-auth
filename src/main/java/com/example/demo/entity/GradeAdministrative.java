@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -92,6 +93,7 @@ public class GradeAdministrative {
     public void setCOEF_REND(String COEF_REND) {
         this.COEF_REND = COEF_REND;
     }
+    @JsonIgnore
     @OneToOne(cascade = CascadeType.ALL)
  @JoinColumn(name = "GRADE_ADM", referencedColumnName = "GRADE_ADM")
  private User userGrade;

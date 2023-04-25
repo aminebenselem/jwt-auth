@@ -166,7 +166,7 @@ public class User implements UserDetails, GrantedAuthority {
         this.grade = grade;
     }
 
-
+    @JsonIgnore
     @OneToOne(mappedBy = "userGrade", cascade = CascadeType.ALL)
     private GradeAdministrative grade;
     public void setUri(String uri) {

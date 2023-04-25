@@ -64,6 +64,7 @@ public class UserController {
     public User getUser() {
         User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         user.setMDP(null);
+        user.setGRADE_ADM(user.getGrade().getLIB_ADM());
         return user;
     }
 
@@ -171,7 +172,7 @@ public class UserController {
         document.add(o);
         document.setMargins(36, 72, 108, 144);
 
-        Paragraph body=new Paragraph("Le Président, Directeur Général du Bureau National de la Radiodiffusion et de la Télévision, certifie que Monsieur "+user.getNOM_PERS().toLowerCase()+" "+user.getPREN_PERS().toLowerCase()+" occupe un plan de "+user.getGrade().getLIB_ADM()+", apprenti, au Centre de Transmission de la Radio et de la Télévision, étrangement.",font);
+        Paragraph body=new Paragraph("Le Président, Directeur Général du Bureau National de la Radiodiffusion et de la Télévision, certifie que Monsieur "+user.getNOM_PERS().toLowerCase()+" "+user.getPREN_PERS().toLowerCase()+" occupe un plan de "+user.getGrade().getLIB_ADM().toLowerCase()+", apprenti, au Centre de Transmission de la Radio et de la Télévision, étrangement.",font);
         body.setSpacingBefore(60);
 
         document.add(body);

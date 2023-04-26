@@ -39,7 +39,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/users/**","/user","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
 
                 ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
-                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation").authenticated()
+                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie").authenticated()
 
                 .requestMatchers("/auth","/image/**").permitAll()
                 .and()

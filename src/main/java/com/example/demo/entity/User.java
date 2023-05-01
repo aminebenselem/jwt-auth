@@ -250,6 +250,20 @@ public class User implements UserDetails, GrantedAuthority {
     @JsonIgnore
     @OneToMany(mappedBy = "userR")
     private Set<Reply> replies;
+    @JsonIgnore
+
+    public Set<FicheDePaie> getFicheDePaie() {
+        return FicheDePaie;
+    }
+    @JsonIgnore
+
+    public void setFicheDePaie(Set<FicheDePaie> ficheDePaie) {
+        FicheDePaie = ficheDePaie;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userP")
+    private Set<FicheDePaie> FicheDePaie ;
 
     public User() {
     }

@@ -7,6 +7,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Formation;
 import com.example.demo.repository.FormationDao;
+import com.example.demo.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +23,14 @@ public class FormationController {
     @Autowired
     private FormationDao FormationDao;
 
-
+    @Autowired
+    private EmailService emailService;
 
 
     @PostMapping({"/addformation"})
     public ResponseEntity<HttpStatus> addFormation(@RequestBody Formation formation) {
         this.FormationDao.addFormation(formation);
+        emailService.sendSimpleMessage("abensaid511@gmail.com", "Nouveau Formation", "Bonjour il ya un nouveau formation","http://localhost:4200/formation");
         return new ResponseEntity(HttpStatus.OK);
     }
     @GetMapping("/getallformation")

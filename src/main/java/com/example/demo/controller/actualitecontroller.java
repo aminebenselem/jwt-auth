@@ -27,7 +27,7 @@ public class actualitecontroller {
         event.getDate().setTime( event.getDate().getTime() + (1000 * 60 * 60 * 24));
 
         eventDao.addAct(event);
-        emailService.sendSimpleMessage("aminebenselem09@gmail.com", "Test Subject", "Test Message");
+        emailService.sendSimpleMessage("abensaid511@gmail.com", "Nouvelle Actualité", "Bonjour vous avez une nouvelle actualites","http://localhost:4200/actualites");
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/actualite")

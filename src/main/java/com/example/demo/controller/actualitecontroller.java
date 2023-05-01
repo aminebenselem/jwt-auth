@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Actualite;
 import com.example.demo.repository.ActDao;
+import com.example.demo.repository.NotificationDao;
+import com.example.demo.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,11 +18,16 @@ public class actualitecontroller {
 
     @Autowired
     private ActDao eventDao;
+    @Autowired
+    private NotificationDao notificationDao;
+    @Autowired
+    private EmailService emailService;
     @PostMapping("/newact")
     public ResponseEntity<HttpStatus> addEvent(@RequestBody Actualite event){
         event.getDate().setTime( event.getDate().getTime() + (1000 * 60 * 60 * 24));
 
         eventDao.addAct(event);
+        emailService.sendSimpleMessage("aminebenselem09@gmail.com", "Test Subject", "Test Message");
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/actualite")

@@ -5,11 +5,10 @@
 
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 @Entity
 @Table(
@@ -96,4 +95,15 @@ public class Formation {
     public void setFormateur(String formateur) {
         this.formateur = formateur;
     }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+    @JsonIgnore
+    @ManyToMany(mappedBy = "mesFormation",cascade=CascadeType.ALL)
+    Set<User> users;
 }

@@ -1,34 +1,39 @@
 package com.example.demo.controller;
+
 import auth.AuthParams;
 import auth.JwtResponse;
 import auth.Password;
+import auth.UserFormation;
 import com.example.demo.config.TokenGeneration;
-import com.example.demo.entity.Agenda;
-import com.example.demo.entity.User;
+import com.example.demo.entity.*;
+import com.example.demo.repository.UserDao;
 import com.example.demo.service.UserService;
-
 import com.lowagie.text.*;
-import com.lowagie.text.pdf.BaseFont;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.*;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.Set;
 
 
 @RestController
@@ -45,6 +50,8 @@ public class UserController {
     private UserService userService;
     @Autowired
     private AuthenticationManager authenticationManager;
+    @Autowired
+    private UserDao userDao;
 
     @GetMapping("/users")
     public List<User> getUsers() {
@@ -54,7 +61,7 @@ public class UserController {
             user.setMDP(null);
             user.setCOMPTE_DOMIC(null);
             user.setCIN(null);
-            user.setMat_Pers(null);
+           user.setMesFormation(null);
             user.setNUM_ASS(null);
         }
 
@@ -148,8 +155,10 @@ public class UserController {
     }
 
     @GetMapping(value = "/attestation")
-    public void generateAttestation(HttpServletResponse response) throws IOException {
+    public ResponseEntity<byte[]> generateAttestation(HttpServletResponse response) throws IOException {
         User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        String username=user.getMat_Pers();
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         // create a new PDF document
         Document document = new Document();
@@ -177,13 +186,47 @@ public class UserController {
         body.setSpacingBefore(60);
 
         document.add(body);
-
         // close the document
         document.close();
 
         // set the response headers
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=\"attestationdetravail.pdf\"");
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "attestation.pdf");
+        headers.setContentLength(baos.size());
+
+        return new ResponseEntity<>(baos.toByteArray(), headers, HttpStatus.OK);
+
+    }
+
+    @GetMapping(value = "/famille")
+    public List<Famille> getUserFamily() {
+        User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        return user.getFamille();
+    }
+    @PostMapping({"/addformationUser"})
+    public ResponseEntity<HttpStatus> userFormation(@RequestBody UserFormation userFormation) {
+        User x;
+        for (String user:
+                userFormation.users) {
+            x= userService.getUser(user);
+            x.getMesFormation().add(userFormation.formation);
+            userDao.save(x);
+        }
+        return new ResponseEntity(HttpStatus.OK);
+    }
+    @GetMapping(value = "/mesformation")
+    public Set<Formation> getUserFormation() {
+        User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        return user.getMesFormation();
+    }
+    @GetMapping(value = "/mesnotification")
+    public List<Notification> getUserNotif() {
+        User user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+
+        return user.getNotification();
     }
 
 }

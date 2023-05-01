@@ -7,14 +7,14 @@ package com.example.demo.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(
@@ -207,6 +207,46 @@ public class User implements UserDetails, GrantedAuthority {
             fetch = FetchType.LAZY
     )
     private List<Agenda> agenda;
+
+    public List<Famille> getFamille() {
+        return famille;
+    }
+
+    public void setFamille(List<Famille> famille) {
+        this.famille = famille;
+    }
+
+    public Set<Formation> getMesFormation() {
+        return mesFormation;
+    }
+
+    public void setMesFormation(Set<Formation> mesFormation) {
+        this.mesFormation = mesFormation;
+    }
+    @JsonIgnore
+    @ManyToMany(cascade=CascadeType.ALL)
+    @JoinTable(
+            name = "formation_user",
+            joinColumns = @JoinColumn(name = "Mat_Pers"),
+            inverseJoinColumns = @JoinColumn(name = "id"))
+    Set<Formation> mesFormation;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userFamily")
+    private List<Famille> famille;
+
+    public List<Notification> getNotification() {
+        return notification;
+    }
+
+    public void setNotification(List<Notification> notification) {
+        this.notification = notification;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userNotif")
+    private List<Notification> notification;
+
     @JsonIgnore
     @OneToMany(mappedBy = "userR")
     private Set<Reply> replies;

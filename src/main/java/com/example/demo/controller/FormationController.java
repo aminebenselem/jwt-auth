@@ -6,7 +6,6 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Formation;
-import com.example.demo.entity.Reclamation;
 import com.example.demo.repository.FormationDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,13 +24,15 @@ public class FormationController {
 
 
 
+
     @PostMapping({"/addformation"})
-    public ResponseEntity<HttpStatus> addAgenda(@RequestBody Formation formation) {
+    public ResponseEntity<HttpStatus> addFormation(@RequestBody Formation formation) {
         this.FormationDao.addFormation(formation);
         return new ResponseEntity(HttpStatus.OK);
     }
     @GetMapping("/getallformation")
-    public ResponseEntity<List<Formation>> getReclamation(){
+    public ResponseEntity<List<Formation>> getFormation(){
         return new ResponseEntity<>(FormationDao.getAllForamtion(),HttpStatus.OK) ;
     }
+
 }

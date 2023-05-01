@@ -4,6 +4,7 @@ import auth.ForumReply;
 import com.example.demo.entity.Forum;
 import com.example.demo.entity.Reply;
 import com.example.demo.repository.ForumDao;
+import com.example.demo.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,10 +19,12 @@ import java.util.*;
 public class ForumController {
     @Autowired
     private ForumDao forumDao;
-
+    @Autowired
+    private EmailService emailService;
     @PostMapping("/newforum")
     public ResponseEntity<HttpStatus> addForum(@RequestBody Forum forum) {
         forumDao.addForum(forum);
+        emailService.sendSimpleMessage("abensaid511@gmail.com", "Nouveau discussion", "Bonjour il ya un nouveau discussion","http://localhost:4200/forum");
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

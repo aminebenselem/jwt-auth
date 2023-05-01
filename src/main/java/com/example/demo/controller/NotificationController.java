@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
+import com.example.demo.entity.FicheDePaie;
 import com.example.demo.entity.Notification;
 import com.example.demo.repository.NotificationDao;
+import com.example.demo.repository.NotificationUpdateDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -16,6 +15,8 @@ import java.util.List;
 public class NotificationController {
     @Autowired
     private NotificationDao notificationDao;
+    @Autowired
+    private NotificationUpdateDao notif;
 
     public NotificationController(NotificationDao notificationDao) {
         this.notificationDao = notificationDao;
@@ -29,5 +30,16 @@ public class NotificationController {
     @GetMapping("/notification")
     public ResponseEntity<List<Notification>> getReplies(){
         return new ResponseEntity<>(notificationDao.getAllNotif(),HttpStatus.OK);
+    }
+
+
+    @PutMapping("/updateviewed")
+    public void UpdateNotifications (@RequestBody Notification e){
+        Notification x = new Notification();
+        x.setId(e.getId());
+        x.setViewed(e.isViewed());
+        notif.updateNotif(x.isViewed(),x.getId());
+
+
     }
 }

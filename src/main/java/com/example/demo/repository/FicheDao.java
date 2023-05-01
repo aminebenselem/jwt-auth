@@ -16,5 +16,5 @@ public interface FicheDao extends CrudRepository<FicheDePaie, Long> {
 
 
     @Query("UPDATE FicheDePaie e SET e.uri=?1 WHERE  e.Id= ?2 ")
-    public void updatekhra(String uri, long id);
+    public void updatefich(String uri, long id);
 }

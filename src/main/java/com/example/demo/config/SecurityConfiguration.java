@@ -46,7 +46,7 @@ public class SecurityConfiguration {
 
                 ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
 
-                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**","/newfiche").authenticated()
+                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**","/newfiche","/famille").authenticated()
 
 
                 .requestMatchers("/auth","/image/**").permitAll()
@@ -67,7 +67,7 @@ public class SecurityConfiguration {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*");
+                registry.addMapping("/*").allowedOrigins("");
             }
         };
     }

@@ -50,7 +50,7 @@ public class FicheDePaieController {
     x.setId(e.getId());
     x.setUri(e.getUri());
 
-      Fiche.updatekhra(x.getUri(), x.getId());
+      Fiche.updatefich(x.getUri(), x.getId());
 }
 
 }

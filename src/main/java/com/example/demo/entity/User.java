@@ -265,6 +265,30 @@ public class User implements UserDetails, GrantedAuthority {
     @OneToMany(mappedBy = "userP")
     private Set<FicheDePaie> FicheDePaie ;
 
+    public Set<DemandesAdministratif> getDemande() {
+        return Demande;
+    }
+    @JsonIgnore
+    public void setDemande(Set<DemandesAdministratif> demande) {
+        Demande = demande;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userT")
+    private Set<TableauDeService> TableauDeService ;
+    @JsonIgnore
+    @OneToMany(mappedBy = "userA")
+    private Set<DemandesAdministratif> Demande;
+
+
+    public Set<TableauDeService> getTableauDeService() {
+        return TableauDeService;
+    }
+
+    public void setTableauDeService(Set<TableauDeService> tableauDeService) {
+        TableauDeService = tableauDeService;
+    }
+
     public User() {
     }
 

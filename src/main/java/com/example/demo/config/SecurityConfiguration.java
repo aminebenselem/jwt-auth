@@ -47,6 +47,9 @@ public class SecurityConfiguration {
 
                 ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
 
+                ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation",
+                        "/fichedepaie/**","/newfiche","/mesnotification","/famille",
+                        "/updateviewed","/addformationUser","/monPointage","/addpointage","/notify"
                 ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/newdemande","/getdemandes","/uploadformation","/getallformation","/tableau/**","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**","/newfiche","/famille").authenticated()
 
 

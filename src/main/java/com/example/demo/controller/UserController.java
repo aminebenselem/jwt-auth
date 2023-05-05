@@ -9,8 +9,6 @@ import com.example.demo.entity.*;
 import com.example.demo.repository.UserDao;
 import com.example.demo.service.UserService;
 import com.lowagie.text.*;
-import com.lowagie.text.pdf.PdfPCell;
-import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +59,7 @@ public class UserController {
             user.setMDP(null);
             user.setCOMPTE_DOMIC(null);
             user.setCIN(null);
-           user.setMesFormation(null);
+            user.setMesFormation(null);
             user.setNUM_ASS(null);
         }
 
@@ -112,7 +110,7 @@ public class UserController {
     @PutMapping(value = "/updateemail")
     public void UpdateUserEmail(@RequestBody AuthParams Authparam) {
         if(Objects.equals(Authparam.Mat_Pers, SecurityContextHolder.getContext().getAuthentication().getName())){
-        userService.UpdateUserEmail(Authparam.Mat_Pers, Authparam.MDP);
+            userService.UpdateUserEmail(Authparam.Mat_Pers, Authparam.MDP);
         }
     }
 

@@ -280,7 +280,17 @@ public class User implements UserDetails, GrantedAuthority {
     @OneToMany(mappedBy = "userA")
     private Set<DemandesAdministratif> Demande;
 
+    public Set<DocumentsUser> getDoc() {
+        return Doc;
+    }
 
+    public void setDoc(Set<DocumentsUser> doc) {
+        Doc = doc;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userD")
+    private Set<DocumentsUser> Doc ;
     public Set<TableauDeService> getTableauDeService() {
         return TableauDeService;
     }

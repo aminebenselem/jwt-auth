@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.FicheDePaie;
 import com.example.demo.entity.Formation;
+import com.example.demo.entity.User;
 import com.example.demo.repository.FicheDao;
 import com.example.demo.repository.FicheDePaieDao;
+import com.example.demo.service.UserService;
 import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value="/fichedepaie")
@@ -23,6 +26,8 @@ public class FicheDePaieController {
     private FicheDePaieDao fiche;
     @Autowired
     private FicheDao Fiche;
+    @Autowired
+    private UserService ser;
     @PostMapping("/newfiche")
     public ResponseEntity<HttpStatus> addEvent(@RequestBody FicheDePaie ficheP){
         fiche.addFicheDePaie(ficheP);
@@ -36,6 +41,13 @@ public class FicheDePaieController {
     @GetMapping("/getfiche/{id}")
     public FicheDePaie getFiche(@PathVariable long id){
         return fiche.getfiche(id) ;
+    }
+    @GetMapping("/getficheforuser")
+    public Set<FicheDePaie> getFicheByUser(){
+        User x=ser.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+
+
+        return x.getFicheDePaie() ;
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import com.example.demo.repository.DemandesDao;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
@@ -48,7 +49,8 @@ public class SecurityConfiguration {
 
                 ,"/updateemail","/formation/**","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation",
                         "/fichedepaie/**","/newfiche","/mesnotification","/famille",
-                        "/updateviewed","/addformationUser","/monPointage","/addpointage","/notify").authenticated()
+                        "/updateviewed","/addformationUser","/monPointage","/addpointage","/notify"
+                ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/newdemande","/getdemandes","/uploadformation","/getallformation","/tableau/**","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**","/newfiche","/famille").authenticated()
 
 
                 .requestMatchers("/auth","/image/**").permitAll()
@@ -59,6 +61,7 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {

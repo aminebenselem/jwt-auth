@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.FicheDePaie;
 import com.example.demo.entity.Notification;
 import com.example.demo.repository.NotificationDao;
 import com.example.demo.repository.NotificationUpdateDao;
@@ -35,11 +34,9 @@ public class NotificationController {
 
     @PutMapping("/updateviewed")
     public void UpdateNotifications (@RequestBody Notification e){
-        Notification x = new Notification();
-        x.setId(e.getId());
-        x.setViewed(e.isViewed());
-        notif.updateNotif(x.isViewed(),x.getId());
 
+        e.setViewed(true);
+        notif.save(e);
 
     }
 }

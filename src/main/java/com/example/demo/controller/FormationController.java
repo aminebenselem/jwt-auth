@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin(
@@ -30,12 +31,22 @@ public class FormationController {
     @PostMapping({"/addformation"})
     public ResponseEntity<HttpStatus> addFormation(@RequestBody Formation formation) {
         this.FormationDao.addFormation(formation);
-        emailService.sendSimpleMessage("abensaid511@gmail.com", "Nouveau Formation", "Bonjour il ya un nouveau formation","http://localhost:4200/formation");
+        emailService.sendSimpleMessage("abensaid511@gmail.com", "Nouveau Formation", "Bonjour il ya une nouvelle formation","http://localhost:4200/formation");
         return new ResponseEntity(HttpStatus.OK);
     }
     @GetMapping("/getallformation")
     public ResponseEntity<List<Formation>> getFormation(){
-        return new ResponseEntity<>(FormationDao.getAllForamtion(),HttpStatus.OK) ;
+        List<Formation> formations =FormationDao.getAllForamtion();
+
+        for (int i = 0; i < formations.size(); i++) {
+            for (int j = i+1; j < formations.size(); j++) {
+                if (Objects.equals(formations.get(i).getUri(), formations.get(j).getUri())) {
+                    formations.remove(j);
+                    j--;
+                }
+            }
+        }
+        return new ResponseEntity<>(formations,HttpStatus.OK) ;
     }
 
 }

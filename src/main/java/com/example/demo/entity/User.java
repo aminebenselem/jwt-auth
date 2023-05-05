@@ -247,6 +247,18 @@ public class User implements UserDetails, GrantedAuthority {
     @OneToMany(mappedBy = "userNotif")
     private List<Notification> notification;
 
+    public List<Pointage> getPointages() {
+        return pointages;
+    }
+
+    public void setPointages(List<Pointage> pointages) {
+        this.pointages = pointages;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "userPoint")
+    private List<Pointage> pointages;
+
     @JsonIgnore
     @OneToMany(mappedBy = "userR")
     private Set<Reply> replies;

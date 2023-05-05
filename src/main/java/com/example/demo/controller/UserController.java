@@ -226,6 +226,11 @@ public class UserController {
 
         return user.getNotification();
     }
+    @GetMapping(value = "/getdemandebyuser")
+    public Set<DemandesAdministratif> getUserDemande(){
+        User user=userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        return user.getDemande();
+    }
 
 }
 

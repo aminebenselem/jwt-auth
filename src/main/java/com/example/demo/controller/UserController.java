@@ -6,6 +6,7 @@ import auth.Password;
 import auth.UserFormation;
 import com.example.demo.config.TokenGeneration;
 import com.example.demo.entity.*;
+import com.example.demo.repository.FormationRepo;
 import com.example.demo.repository.UserDao;
 import com.example.demo.service.UserService;
 import com.lowagie.text.*;
@@ -50,6 +51,8 @@ public class UserController {
     private AuthenticationManager authenticationManager;
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private FormationRepo Formationrepo;
 
     @GetMapping("/users")
     public List<User> getUsers() {
@@ -206,10 +209,12 @@ public class UserController {
     @PostMapping({"/addformationUser"})
     public ResponseEntity<HttpStatus> userFormation(@RequestBody UserFormation userFormation) {
         User x;
+        Formation formation=this.Formationrepo.save(userFormation.formation);
+
         for (String user:
                 userFormation.users) {
             x= userService.getUser(user);
-            x.getMesFormation().add(userFormation.formation);
+            x.getMesFormation().add(formation);
             userDao.save(x);
         }
         return new ResponseEntity(HttpStatus.OK);

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping(value="/")
+@CrossOrigin(origins = "http://localhost:4200")
 public class NotificationController {
     @Autowired
     private NotificationDao notificationDao;

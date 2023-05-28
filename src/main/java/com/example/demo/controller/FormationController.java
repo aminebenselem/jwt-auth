@@ -7,6 +7,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Formation;
 import com.example.demo.repository.FormationDao;
+import com.example.demo.repository.FormationRepo;
 import com.example.demo.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 @RestController
 @CrossOrigin(
@@ -23,6 +23,8 @@ import java.util.Objects;
 public class FormationController {
     @Autowired
     private FormationDao FormationDao;
+    @Autowired
+    private FormationRepo Formationrepo;
 
     @Autowired
     private EmailService emailService;
@@ -38,14 +40,7 @@ public class FormationController {
     public ResponseEntity<List<Formation>> getFormation(){
         List<Formation> formations =FormationDao.getAllForamtion();
 
-        for (int i = 0; i < formations.size(); i++) {
-            for (int j = i+1; j < formations.size(); j++) {
-                if (Objects.equals(formations.get(i).getUri(), formations.get(j).getUri())) {
-                    formations.remove(j);
-                    j--;
-                }
-            }
-        }
+
         return new ResponseEntity<>(formations,HttpStatus.OK) ;
     }
 

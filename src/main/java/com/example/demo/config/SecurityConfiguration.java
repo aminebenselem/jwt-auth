@@ -50,7 +50,9 @@ public class SecurityConfiguration {
                 ,"/updateemail","/formation/**","/getdemandebyuser","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation",
                         "/fichedepaie/**","/newfiche","/mesnotification","/famille",
                         "/updateviewed","/addformationUser","/monPointage","/addpointage","/notify"
-                ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/newdemande","/getdemandes","/uploadformation","/getallformation","/tableau/**","/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**","/newfiche","/famille").authenticated()
+                ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/newdemande","/getdemandes","/uploadformation","/getallformation","/tableau/**",
+                        "/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**",
+                        "/newfiche","/famille","/mesformation").authenticated()
 
 
                 .requestMatchers("/auth","/image/**").permitAll()

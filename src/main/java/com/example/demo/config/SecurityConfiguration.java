@@ -43,17 +43,20 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/users/**","/user","/newevent","/events","/newact","/upload","/updatepassword","/newforum","/forums/**"
+                .requestMatchers("/users/**","/user","/events","/upload","/updatepassword","/newforum","/forums/**"
 
-                ,"/reply","/replies","/forep","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/addformation","/newrec","/reclamation/**","/updatephone"
+                ,"/reply","/replies","/actualite","/replie","/forum","/newtask", "/alltasks/**", "/delete", "/newrec"
+                        ,"/reclamation/**","/updatephone"
 
-                ,"/updateemail","/formation/**","/getdemandebyuser","/uploadformation","/getallformation","/recReplies","/replyRec","/updatephoto","/attestation",
-                        "/fichedepaie/**","/newfiche","/mesnotification","/famille",
-                        "/updateviewed","/addformationUser","/monPointage","/addpointage","/notify"
-                ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/newdemande","/getdemandes","/uploadformation","/getallformation","/tableau/**",
-                        "/recReplies","/replyRec","/updatephoto","/attestation","/fichedepaie/**",
-                        "/newfiche","/famille","/mesformation").authenticated()
-
+                ,"/updateemail","/formation/**","/getallformation","/recReplies","/replyRec",
+                        "/updatephoto","/attestation",
+                        "/fichedepaie/**","/mesnotification","/famille",
+                        "/updateviewed","/monPointage","/notify"
+                ,"/updateemail","/formation/**","/newdoc","/update/**","/getdoc","/getdemandes","/getallformation","/tableau/**",
+                      "/updatephoto","/attestation","/fichedepaie/**","/famille","/mesformation").authenticated()
+                .requestMatchers("/newevent","/newact", "/addpointage", "/newfiche").hasRole("ADMIN")
+                .requestMatchers("/newdemande").hasAnyRole("USER","ChefDepartement","AdminFormation")
+                .requestMatchers("/addformation","/addformationUser","/uploadformation").hasRole("AdminFormation")
 
                 .requestMatchers("/auth","/image/**").permitAll()
                 .and()

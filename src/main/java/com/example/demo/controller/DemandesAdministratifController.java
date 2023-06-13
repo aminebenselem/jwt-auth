@@ -32,7 +32,7 @@ private final DemandesAdministratifDao service;
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/getdemandes")
-    public ResponseEntity<List<DemandesAdministratif>> getEvents(){
+    public ResponseEntity<List<DemandesAdministratif>> getDemandes(){
         return new ResponseEntity<>(service.getDemandes(),HttpStatus.OK) ;
     }
 

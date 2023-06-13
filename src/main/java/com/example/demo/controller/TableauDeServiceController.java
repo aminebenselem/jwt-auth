@@ -25,7 +25,7 @@ public class TableauDeServiceController {
    private UserService ser;
     @GetMapping("/tableau/service")
 
-    public ResponseEntity<Set<TableauDeService>> getReplies(){
+    public ResponseEntity<Set<TableauDeService>> getTableau(){
         User x=ser.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         return new ResponseEntity<>(x.getTableauDeService(), HttpStatus.OK);
     }

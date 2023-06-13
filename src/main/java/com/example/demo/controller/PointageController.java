@@ -28,12 +28,12 @@ public class PointageController {
     }
 
     @PostMapping("/addpointage")
-    public ResponseEntity<HttpStatus> Reply(@RequestBody Pointage pointage){
+    public ResponseEntity<HttpStatus> addPointage(@RequestBody Pointage pointage){
         pointageDao.Pointage(pointage);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/monPointage")
-    public ResponseEntity<List<Pointage>> getReplies(){
+    public ResponseEntity<List<Pointage>> getPointages(){
         User x=userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         return new ResponseEntity<>(x.getPointages(),HttpStatus.OK);
     }

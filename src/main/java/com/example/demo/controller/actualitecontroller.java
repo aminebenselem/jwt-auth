@@ -23,7 +23,7 @@ public class actualitecontroller {
     @Autowired
     private EmailService emailService;
     @PostMapping("/newact")
-    public ResponseEntity<HttpStatus> addEvent(@RequestBody Actualite event){
+    public ResponseEntity<HttpStatus> addAct(@RequestBody Actualite event){
         event.getDate().setTime( event.getDate().getTime() + (1000 * 60 * 60 * 24));
 
         eventDao.addAct(event);

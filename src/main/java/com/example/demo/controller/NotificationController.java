@@ -24,12 +24,12 @@ public class NotificationController {
     }
 
     @PostMapping("/notify")
-    public ResponseEntity<HttpStatus> Reply(@RequestBody Notification notification){
+    public ResponseEntity<HttpStatus> addNotif(@RequestBody Notification notification){
         notificationDao.addNotification(notification);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @GetMapping("/notification")
-    public ResponseEntity<List<Notification>> getReplies(){
+    public ResponseEntity<List<Notification>> getNotif(){
         return new ResponseEntity<>(notificationDao.getAllNotif(),HttpStatus.OK);
     }
 
